@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Nos livres
+    
+{% endblock %}
+
+{% block body %}
+    <h1 class=" mt-5">
+        Nos livres
+            
+    </h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae veritatis mollitia maiores, ea beatae officia tempore perferendis quae accusamus debitis molestiae ad illum corporis atque voluptatum quod ullam dolorum sapiente, dolores architecto nesciunt pariatur? Numquam facere repudiandae assumenda consequatur illo ex rerum. Commodi suscipit dolore minima. Sequi ratione ducimus ullam.
+            
+    </p>
+    <hr>
+        <div class="form-group my-3">
+            <form action="{{ path('search_book') }}" method="get" class="d-flex">
+                <input type="text" name="search-value" class="form-control">
+                    <button type="submit" class="btn btn-dark">
+                        recherche
+                    </button>
+
+                </form>
+            </div>
+            <div class="row">
+            {% if livres|length >0 %}
+                {# On fait une boucle sur la variable Livre de la method index #}
+                {% for livre in livres %}
+                    <div class="col-12 col-md-3 col-lg-2 mb-2">
+                        <a href="{{ path('livre-detail',{'slug':livre.id}) }} " class="img-livre">
+                            <img src="{{ asset('images/livres/'~ livre.imageName) }}" alt="{{ livre.titre }}" class="img-thumbnail  ">
+                            {% if app.user and livre not in app.user.booklist %}
+                            <button data-livreid="{{livre.id}}" class="btn btn-warning absolute text-white btn-sm bt-favori"><i class="fa fa-star" aria-hidden="true"></i></button>
+                            {% endif %}
+                        </a>
+                    </div>
+                    <hr>
+
+                {% endfor %}
+            {% else %}
+                    <div class="col-12">
+                        Aucun resultat pour votre recherche
+                    </div>
+            {% endif %}
+            </div>
+            <div>
+                <a href="{{ path('admin_livre_index') }}" class="btn btn-primary bg-primary mt-2">
+                <i class="fa fa-backward" aria-hidden="true"></i>back to list</a>
+            </div>
+            <div class="navigation mt-3">
+                {{ knp_pagination_render(livres) }}
+            </div>
+{% endblock %}
+
+{% block javascripts %}
+ <script src="{{asset("js/livre-favoris.js")}}"></script>
+{% endblock %}
+                

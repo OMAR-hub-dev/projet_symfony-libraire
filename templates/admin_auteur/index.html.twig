@@ -1,0 +1,51 @@
+{% extends 'base-admin7.html.twig' %}
+
+{% block title %}Auteur index{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5 mb-2">Auteur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr class="bg-warning text-center align-middle">
+                <th>Id</th>
+                {# <th>Pseudo</th> #}
+                {# <th>Nom</th> #}
+                {# <th>biographie</th> #}
+                <th>Prenom</th>
+                <th>Photo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for auteur in auteurs %}
+            <tr class="bg-light text-center align-middle">
+                <td>{{ auteur.id }}</td>
+                {# <td>{{ auteur.pseudo }}</td> #}
+                {# <td>{{ auteur.nom }}</td> #}
+                {# <td>{{ auteur.biographie }}</td> #}
+                <td>{{ auteur.prenom }}</td>
+                <td>
+                    {% if auteur.imageName is defined and auteur.imageName is not null %}
+                    <img src="{{ asset('images/auteurs/' ~ auteur.imageName) }}" alt="{{ auteur.nom }}" class="img-list-admin"></td>
+                    {% else %}
+                    <img src="{{asset('images/auteurs/man.webp')}}" alt="" class="img-list-admin">
+                    {% endif %}
+                </td>
+                
+                <td>
+                    <a href="{{ path('admin_auteur_show', {'id': auteur.id}) }}" class="btn btn-secondary  "><i class="fa fa-eye "  aria-hidden="true"></i></a>
+                    <a href="{{ path('admin_auteur_edit', {'id': auteur.id}) }}" class="btn btn-secondary "><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_auteur_new') }}" class="btn btn-secondary bg-secondary">Create new</a>
+    
+{% endblock %}

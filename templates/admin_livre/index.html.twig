@@ -1,0 +1,56 @@
+{% extends 'base-admin7.html.twig' %}
+
+{% block title %}Livre index{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <h2 class="mt-2"  >Liste des livres</h2>
+        <a href="{{ path('admin_livre_new') }}" class="btn btn-secondary my-2 "> Nouveau</a>
+    </div>
+    
+
+    <table class="table">
+        <thead>
+            <tr class="bg-warning text-center ">
+                <th>Id</th>
+                <th>Image</th>
+                <th>Titre</th>
+                <th>auteur</th>
+                {# <th>Description</th> #}                 
+                {# <th>ImageSize</th> #}
+                <th>Mise à jour</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr class="bg-light text-center align-middle">
+                <td>{{ livre.id }}</td>
+                <td>
+                     {% if livre.imageName is defined and livre.imageName is not null %}
+                    <img src="{{ asset('images/livres/' ~ livre.imageName) }}" alt="{{ livre.titre }}" class="img-list-admin img-thumbnail mb-1"></td>
+                    {% else %}
+                    <img src="{{asset('images/livres/man.webp')}}" alt="" class="img-list-admin img-thumbnail mb-1">
+                    {% endif %} 
+                {# <img src="{{asset('images/livres/'~ livre.imageName)}}" alt="{{livre.titre}}" class="img-list-admin"> #}
+                </td>
+                <td >{{ livre.titre }}</td>
+                <td >{{ livre.auteur }}</td>
+                {# <td>{{ livre.description }}</td> #}                
+                {# <td>{{ livre.imageSize }}</td> #}
+                <td>{{ livre.updatedAt ? livre.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_livre_show', {'id': livre.id}) }}" class="btn btn-secondary  "><i class="fa fa-eye "  aria-hidden="true"></i></a>
+                    <a href="{{ path('admin_livre_edit', {'id': livre.id}) }}" class="btn btn-secondary "><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   
+{% endblock %}

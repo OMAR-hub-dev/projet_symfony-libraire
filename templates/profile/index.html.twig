@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+
+{# Afficahge des messages s'il y en a #}
+{% for label, messages in app.flashes(['success', 'warning','danger']) %}
+    {% for message in messages %}
+    <div class="alert alert-{{ label }} alert-dismissible fade show mt-3" role="alert">
+    {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+{% endfor %}
+
+{# TabPanel#}
+<ul class="nav nav-tabs my-5" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#infos" type="button" role="tab" aria-controls="home" aria-selected="true">Mes informations</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#liste" type="button" role="tab" aria-controls="profile" aria-selected="false">Ma liste de lecture</button>
+    </li>
+    
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="infos"         role="tabpanel" aria-labelledby="home-tab">
+        {{form_start(form)}}
+        {{form_widget(form)}}
+        <button class="btn btn-success mt-3" type="submit">Modifier</button>
+        {{form_end(form)}}
+    </div>
+    <div class="tab-pane fade" id="liste" role="tabpanel" aria-labelledby="profile-tab">
+        {% if app.user.booklist|length > 0 %}
+        <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Auteur</th>
+            <th scope="col">Action</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for livre in app.user.booklist %}
+          <tr>
+              <td> <img src="{{asset('images/livres/'~livre.imageName)}}" alt=""> </td>
+              <td>
+                {% if livre.auteur.pseudo is defined and livre.auteur.pseudo is not null %}
+                {{livre.auteur.pseudo}}
+                {% else %}
+                    {% if livre.auteur.nom is defined and livre.auteur.nom is not null %}
+                    {{livre.auteur.nom}}
+                    {% endif %}
+                    {% if livre.auteur.prenom is defined and livre.auteur.prenom is not null %}
+                    {{livre.auteur.prenom}}
+                    {% endif %}
+                {% endif %}
+                
+            </td>
+            <td>{{livre.titre}}</td>
+            <td><a href="{{path('deleteLivreListe',{'id':livre.id})}}">Supprimer</a></td>
+              
+          </tr>
+        {% endfor %}
+          
+        </tbody>
+      </table>
+        {% else %}
+            <p>Vous n'avez de livres dans votre liste de lecture</p>
+        {% endif %}
+    </div>
+  
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        // on verifie sil ya des objets de la classe alert dans le DOM de la page à l'aide du sélecteur jquerys('') qui comme on selctionne une classe nous renvoie un tableau dont on verifie que la longueur est > 0
+        if ($(".alert").length>0){// On cree une pause avec le setTimeOut qui ceclenchera une fonction anonyme apres 2 secondes
+            setTimeout(function (){
+                $(".alert").fadeOut(500,function(){$(".alert").remove()})
+            },2000);// On declence la disparition en fondu (animation de style css) des alerts
+            // Lorsque le fondu est effectué on supprime l'alert du DOM avec remove();
+
+        }
+    </script>
+{% endblock %}

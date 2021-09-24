@@ -1,0 +1,11 @@
+{% extends 'base-admin7.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <h1>Create new User</h1>
+
+    {{ include('admin_user/_form.html.twig') }}
+
+    <a href="{{ path('admin_user_index',{'role':role}) }}">Retour à la list</a>
+{% endblock %}

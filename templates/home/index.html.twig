@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+    {% if homeContent.titre is defined and homeContent.titre is not null %}
+<h1 class="mt-5 bg-light text-center align-middle">{{homeContent.titre}}</h1>
+    {% endif %}
+    {% if homeContent.texte is defined and homeContent.texte is  not null %}
+    <p>{{homeContent.texte}}</p><hr>
+    {% endif %}
+    
+    <div class="form-group my-3">
+        <form action="{{path('search_book')}}" method="get" class="d-flex">
+        <input type="text" name="search-value" class="form-control">
+        <button type="submit" class="btn btn-dark">recherche</button>
+        
+        </form>
+    </div>
+<div class="row">
+        {% for livre in livres %}
+        <div class="col-6 col-md-3 bg-light text-center align-middle">
+            <img src="{{asset("images/livres/" ~ livre.imageName)}}" alt="" class="img-thumbnail mb-2">
+        </div>
+        {% endfor %}
+</div><hr>
+<div>
+    <a href="{{ path('admin_home_index') }}" class="btn btn-primary bg-primaray mt-2"><i class="fa fa-backward" aria-hidden="true"></i>back to list</a>
+
+</div>
+{% endblock %}

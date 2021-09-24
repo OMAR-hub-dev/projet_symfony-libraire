@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                Welcome!
+            {% endblock %}
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('css/admin.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/navbar.css')}}">
+        <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+        {% block stylesheets %}{% endblock %}
+
+    </head>
+    <body class="admin">
+        <header class="bg-dark text-light py-3 px-3 d-flex justify-content-between">
+            <div class="text_light">La librairie Admin</div>
+            <div class="d-flex">
+                <span> Bienvenue {{app.user.email}}</span>
+                <a href="{{path("app_logout")}}" class="nav-link text-light ms-3">Déconnexion</a>
+            </div>
+        </header>
+        
+
+        {# second navbar #}
+        
+        {# the end of second navbar #}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-8 col-md-2 bg-admin-menu">
+                    <ul class="list-unstyled">
+                        <li><img src="" alt="" class="img"></li>
+                        <li><a href="{{path('admin_dashboard')}}">Dashboard</a></li>
+                        <li><a href="{{path('admin_user_index',{role:'admin'})}}">Adminstrateur</a></li>
+                        <li><a href="{{path('admin_user_index',{role:'user'})}}">Utilisateurs</a></li>
+                        <li><a href="{{path('admin_home_index')}}">Homepage</a></li>
+                        <li><a href="{{path('admin_auteur_index')}}">Auteurs</a></li>
+                        <li><a href="{{path('admin_livre_index')}}">Livres</a></li>
+                        <li><a href="{{path('admin_message')}}">Messages</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-10">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+           
+        
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        {% block javascripts %}
+            
+        {% endblock %}
+    </body>
+</html>

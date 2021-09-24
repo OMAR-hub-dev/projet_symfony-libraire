@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block title %}
+                Welcome!
+            {% endblock %}
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('css/admin.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/navbar.css')}}">
+        <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+        {% block stylesheets %}{% endblock %}
+
+    </head>
+    <body>
+        {#navbar#}
+            {#<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+            <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="./" class="navbar-brand">La librairie Menu</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                         <a href="{{path('home')}}"><i class="fa fa-home" aria-hidden="true"></i>Home</a> 
+                    </li>
+                    <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Mission</a></li>
+                                <li><a href="#">Vision</a></li>
+                                <li><a href="#">Careers</a></li>
+                                </ul> 
+                    </li>
+                    <li>
+                        <a href="{{path('livre')}}"><i class="fa fa-book" aria-hidden="true"></i>Livres</a>
+                    </li>
+                    <li>
+                        <a href="{{path('auteur')}}"><i class="fa fa-users" aria-hidden="true"></i>Auteurs</a>
+                    </li>
+                    <li class="active">
+                    {% if  is_granted('ROLE_USER') %}
+                        <a href="{{path('profile')}}"><i class="fa fa-user" aria-hidden="true"></i>Mon compte</a>
+                    {% endif %}
+                    </li>
+                     <li class="nav-item ">
+                    {% if  is_granted('ROLE_USER') %}
+                        
+                        <a class="nav-link" href="{{path('app_logout')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>deconnexion</a>
+                    {% else %}
+                        <a class="nav-link" href="{{path('app_login')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>Se connecter</a>
+                    {% endif %}
+                    </li>
+                    {% if not is_granted('ROLE_USER') %}
+                    <li>
+                        <a class="nav-link" href="{{path('app_register')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>Inscription</a>                  
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);"><i class="fa fa-shopping-basket" aria-hidden="true"></i>Mon panier</a>
+                    </li>
+                    
+                    {% if  is_granted('ROLE_USER') %}
+                    <li class="nav-item align-items-center d-flex ms-auto">
+                    <span><i class="fa fa-info" aria-hidden="true"></i>Bienvenue 
+                    {% if app.user.pseudo is defined and app.user.pseudo is not null %}
+                    {{app.user.pseudo}}
+                    {% elseif app.user.firstname is defined and app.user.firstname is not null %}{{app.user.firstname}}
+                    {% else %}
+                    {{app.user.email}}
+                    {% endif %}
+                    </span>                 
+                    </li>
+                    {% endif %} 
+                </ul>
+            </nav>#}
+        </div>
+      </header>
+        {# fin de navbar #}
+
+        {# second navbar #}
+          <nav class="navbar navbar-expand-custom navbar-mainbg">
+                <a class="navbar-brand navbar-logo" href="#">La librairie</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-white"></i>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  w-100">
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{path('home')}}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{path('livre')}}"><i class="fa fa-book" aria-hidden="true"></i>Livres</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{path('auteur')}}"><i class="fa fa-users" aria-hidden="true"></i>Auteurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{path('contact')}}"><i class="fa fa-address-book" aria-hidden="true"></i>Contacts</a>
+                </li>
+                {% if  is_granted('ROLE_USER') %}
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('profile')}}"><i class="fa fa-user" aria-hidden="true"></i>Mon compte</a>
+                    </li>
+                 {% endif %}
+
+                <li class="nav-item ">
+                    {% if  is_granted('ROLE_USER') %}
+                        
+                        <a class="nav-link" href="{{path('app_logout')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>deconnexion</a>
+                    {% else %}
+                        <a class="nav-link" href="{{path('app_login')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>Se connecter</a>
+                    {% endif %}
+                </li>
+                {% if not is_granted('ROLE_USER') %}
+                <li>
+                    <a class="nav-link" href="{{path('app_register')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>Inscription</a>                  
+                </li>
+                {% endif %}
+                
+                
+                {% if  is_granted('ROLE_USER') %}
+                <li class="nav-item align-items-center d-flex ms-auto">
+                    <span><i class="fa fa-info" aria-hidden="true"></i>Bienvenue 
+                    {% if app.user.pseudo is defined and app.user.pseudo is not null %}
+                    {{app.user.pseudo}}
+                    {% elseif app.user.firstname is defined and app.user.firstname is not null %}{{app.user.firstname}}
+                    {% else %}
+                    {{app.user.email}}
+                    {% endif %}
+                    </span>  
+                    {% if app.user.avatar.imageName is defined and app.user.avatar.imageName is not null %}
+                    <img src="{{asset('images/avatars/'~ app.user.avatar.imageName)| imagine_filter('my_thumb40')
+                    }}" alt="">   
+                    {% endif %}            
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+            </nav>  
+        {# the end of second navbar #}
+
+        <div class="container">
+            {% block body %}{% endblock %}
+        
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <script>
+            function test(){ 
+               var tabsNewAnim = $('#navbarSupportedContent');
+               var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+               var activeItemNewAnim = tabsNewAnim.find('.active');
+               var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+               var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+               var itemPosNewAnimTop = activeItemNewAnim.position();
+               var itemPosNewAnimLeft = activeItemNewAnim.position();
+               $(".hori-selector").css({
+                   "top":itemPosNewAnimTop.top + "px", 
+                   "left":itemPosNewAnimLeft.left + "px",
+                   "height": activeWidthNewAnimHeight + "px",
+                   "width": activeWidthNewAnimWidth + "px"
+               });
+               $("#navbarSupportedContent").on("click","li",function(e){
+                   $('#navbarSupportedContent ul li').removeClass("active");
+                   $(this).addClass('active');
+                   var activeWidthNewAnimHeight = $(this).innerHeight();
+                   var activeWidthNewAnimWidth = $(this).innerWidth();
+                   var itemPosNewAnimTop = $(this).position();
+                   var itemPosNewAnimLeft = $(this).position();
+                   $(".hori-selector").css({
+                   "top":itemPosNewAnimTop.top + "px", 
+                   "left":itemPosNewAnimLeft.left + "px",
+                   "height": activeWidthNewAnimHeight + "px",
+                   "width": activeWidthNewAnimWidth + "px"
+                   });
+               });
+               }
+               $(document).ready(function(){
+               setTimeout(function(){ test(); });
+               });
+               $(window).on('resize', function(){
+               setTimeout(function(){ test(); }, 500);
+               });
+               $(".navbar-toggler").click(function(){
+               setTimeout(function(){ test(); });
+               });
+               
+                // --------------add active class-on another-page move----------
+                jQuery(document).ready(function($){
+                    // Get current path and find target link
+                    var path = window.location.pathname.split("/").pop();
+
+                    // Account for home page with empty path
+                    if ( path == '' ) {
+                        path = 'index.html';
+                    }
+
+                    var target = $('#navbarSupportedContent ul li a[href="'+path+'"]');
+                    // Add active class to target link
+                    target.parent().addClass('active');
+                });
+       </script>
+        {% block javascripts %}
+            
+        {% endblock %}
+    </body>
+</html>

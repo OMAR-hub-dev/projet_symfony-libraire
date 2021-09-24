@@ -1,0 +1,33 @@
+{% extends 'base-admin7.html.twig' %}
+
+{% block title %}Message Admin{% endblock %}
+
+{% block body %}
+<h2 class="my-3">Les messages</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for message in messages %}
+        <tr>
+            <td>{{message.email}}</td>
+            <td>{{message.nom}}</td>
+            <td>{{message.prenom}}</td>
+            <td>{{message.message|raw}}</td>
+            <td><a href="{{path('delete-message',{'id':message.id})}}" class="btn btn-danger text-white"><i class="fa fa-trash"></i></a></td>
+        </tr>    
+    {% else %}
+        <tr>
+            <td colspan="5">Aucun message</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

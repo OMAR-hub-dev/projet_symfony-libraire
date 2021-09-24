@@ -1,0 +1,37 @@
+{% extends 'base-admin7.html.twig' %}
+
+{% block title %}Home index{% endblock %}
+
+{% block body %}
+    <h1 class="mt-4">Home index</h1>
+
+    <table class="table">
+        <thead>
+            <tr class="bg-warning text-center align-middle">
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Texte</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for home in homes %}
+            <tr class="bg-light text-center align-middle">
+                <td>{{ home.id }}</td>
+                <td>{{ home.titre }}</td>
+                <td>{{ home.texte }}</td>
+                <td>
+                    <a href="{{ path('admin_home_show', {'id': home.id}) }}"class="btn btn-secondary  "><i class="fa fa-eye "  aria-hidden="true"></i></a>
+                    <a href="{{ path('admin_home_edit', {'id': home.id}) }}"class="btn btn-secondary "><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_home_new') }}"class="btn btn-secondary bg-secondary"><i class="fa fa-plus" aria-hidden="true"></i>Create new</a>
+{% endblock %}

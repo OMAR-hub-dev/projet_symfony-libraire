@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if auteur.pseudo is defined and auteur.pseudo is not null %}
+    {{auteur.pseudo}}
+    {% else %} 
+    {# {{auteur.nom}}{{auteur.prenom}} #}
+    {{auteur.nom ~' '~ auteur.prenom}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="row mt-3">
+    <div class="col-12 col-md-3">
+        {% if auteur.imageName is defined and auteur.imageName is not null %}
+            <img src="{{ asset('images/auteurs/' ~ auteur.imageName) }}" alt="{{ auteur.nom }}" class="img-list-admin img-fluid"></td>
+        {% else %}
+            <img src="{{asset('images/auteurs/man.webp')}}" alt="" class="img-list-admin img-fluid">
+        {% endif %}
+    </div>
+    <div class="col-12 col-md-9">
+        <h1>{{auteur.nom}}</h1>
+        <p>{{auteur.biographie}}</p>
+        <p>
+            {% if auteur.pseudo is defined and auteur.pseudo is not null %}
+            {{auteur.pseudo}}
+            {% else %} 
+            {# {{auteur.nom}}{{auteur.prenom}} #}
+            {{auteur.nom ~' '~ auteur.prenom}}
+            {% endif %}
+        
+        </p>
+    </div>
+    <div>
+    <a href="{{ path('admin_auteur_index') }}" class="btn btn-primary bg-primaray mt-2"><i class="fa fa-backward" aria-hidden="true"></i>back to list</a>
+
+    </div>
+</div>
+{% endblock %}

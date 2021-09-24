@@ -1,0 +1,43 @@
+@import '_variables.scss';
+body{
+    .img-list-admin{
+        max-width: 130px;
+        
+    }
+    .navigation{
+        .page-item.active{
+            .page-link{
+                background-color:$ctaColor ;
+                border-color: #F2E205;
+                
+             }
+        }
+    }
+    .absolute{
+        position:absolute;
+    }
+    .img-livre{
+        position: relative;
+        display: block;
+        .absolute{
+            right: 0;
+            bottom: 0;
+        }
+    }
+   
+}
+
+// .bg-admin-menu{
+//     box-shadow: 2px 2px 2px silver;
+//     width: 300px;
+//     height: 500px;
+//     position: fixed;
+//     bottom: 0;
+//     top: 0;
+    
+// }
+// .admin{
+//     background-image: url('./images/auteurs/librairie.jpg');
+// }
+
+

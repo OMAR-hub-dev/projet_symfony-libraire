@@ -1,0 +1,42 @@
+{% extends 'base-admin7.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+    <h1>Livre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class='bg-warning' >Id</th>
+                <td class='bg-light'>{{ livre.id }}</td>
+            </tr>
+            <tr>
+                <th class='bg-warning'>Titre</th>
+                <td class='bg-light'>{{ livre.titre }}</td>
+            </tr>
+            <tr>
+                <th class='bg-warning'>Description</th>
+                <td class='bg-light'>{{ livre.description|raw }}</td>
+            </tr>
+            <tr>
+                <th class='bg-warning'>ImageName</th>
+                <td class='bg-light'>{{ livre.imageName }}</td>
+            </tr>
+            <tr>
+                <th class='bg-warning'>ImageSize</th>
+                <td class='bg-light'>{{ livre.imageSize }}</td>
+            </tr>
+            <tr>
+                <th class='bg-warning'>UpdatedAt</th>
+                <td class='bg-light'>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_livre_index') }}" class="btn btn-secondary bg-secondary text-center">back to list</a>
+
+    <a href="{{ path('admin_livre_edit', {'id': livre.id}) }}" class="btn btn-secondary bg-secondary text-center">edit</a>
+
+    {{ include('admin_livre/_delete_form.html.twig') }}
+{% endblock %}

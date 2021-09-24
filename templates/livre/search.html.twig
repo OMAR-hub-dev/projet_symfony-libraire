@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos livres{% endblock %}
+
+
+{% block body %}
+{% for livre in livres%}
+<div>{{livre.titre}}</div>
+{% endfor %}
+{% endblock body %}
